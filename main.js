@@ -1,22 +1,20 @@
-setInterval(() => {
-  // 現在時間の取得
-  const now = new Date();
-  const h = now.getHours();
-  const m = now.getMinutes();
-  const s = now.getSeconds();
+function getElements() {
+  const time = new Date();
+  const hour = time.getHours();
+  const minute = time.getMinutes();
+  const second = time.getSeconds();
 
-  // 時、分、秒を元に角度を計算
-  const degH = h * (360 / 12) + m * (360 / 12 / 60);
-  const degM = m * (360 / 60);
-  const degS = s * (360 / 60);
+  const degreeHour = hour / 12 * 360;
+  const degreeMin = minute / 60 * 360;
+  const degreeSec = second / 60 * 360;
 
-  // 各要素を取得
-  const elementH = document.querySelector(".c-clock__hour");
-  const elementM = document.querySelector(".c-clock__min");
-  const elementS = document.querySelector(".c-clock__sec");
+  const clockHour = document.getElementsByClassName('clock-hour')[0];
+  const clockMin = document.getElementsByClassName('clock-min')[0];
+  const clockSec = document.getElementsByClassName('clock-sec')[0];
 
-  // styleを追加
-  elementH.style.transform = `rotate(${degH}deg)`;
-  elementM.style.transform = `rotate(${degM}deg)`;
-  elementS.style.transform = `rotate(${degS}deg)`;
-}, 10);
+  clockHour.style.setProperty('transform', `rotate(${degreeHour}deg)`);
+  clockMin.style.setProperty('transform', `rotate(${degreeMin}deg)`);
+  clockSec.style.setProperty('transform', `rotate(${degreeSec}deg)`);
+}
+
+setInterval(getElements, 10);
